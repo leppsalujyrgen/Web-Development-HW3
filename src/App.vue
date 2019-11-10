@@ -7,7 +7,7 @@
             <section id="main">
                 <div class="content">
                     <UserInfo :currentUser="currentUser" v-if="toggleActive"></UserInfo>
-                    <CoursesInfo :coursesList="coursesList" v-else></CoursesInfo>
+                    <CoursesInfo :coursesList="currentUser.coursesList" :currentUser="currentUser" v-else></CoursesInfo>
                 </div>
                 <div class="controls">
                     <button id="profile-button" :class="[toggleActive ? 'pill pill.active' : 'pill']" v-on:click="showProfile">Profile</button>
@@ -39,13 +39,13 @@
 
         data: () => {
             return {
-                currentUser: new User("John", "Doe", "11/10/1990", "Software engineering", "2.7"),
                 coursesList: [
                     new Course("Agile software development", 1, 82),
                     new Course("System modelling", 1, 85),
                     new Course("Object-oriented programming", 2, 99),
                     new Course("Estonian Language Level A2", 2, 65)
                 ],
+                currentUser: new User("John", "Doe", "11/10/1990", "Software engineering", "2.7"),
                 toggleActive: true,
             }
         },
@@ -63,6 +63,10 @@
             showCourses: function () {
                 this.toggleActive = false;
             }
+        },
+
+        created() {
+            this.currentUser.coursesList = this.coursesList;
         }
     }
 </script>
