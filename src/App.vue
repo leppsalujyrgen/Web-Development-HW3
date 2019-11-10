@@ -6,62 +6,13 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <UserInfo :currentUser="currentUser"></UserInfo>
-                    <div id="courses-container" class="tab">
-                        <h1 class="title">Courses</h1>
-                        <table id="courses">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Course Title</th>
-                                <th>Semester</th>
-                                <th>Grade</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Agile software development</td>
-                                <td>1</td>
-                                <td>82</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>System modeling</td>
-                                <td>1</td>
-                                <td>85</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Object-oriented programming</td>
-                                <td>2</td>
-                                <td>99</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Estonian language Level A2</td>
-                                <td>2</td>
-                                <td>65</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <br>
-                        <br>
-                        <div>
-                            <button id="add-course-button" class="blue-button">+</button>
-                            <span id="add-course">
-                                <input class="input" type="text" placeholder="Course title" id="title">
-                                <input class="input" type="number" min="1" max="8" placeholder="Semester" id="semester">
-                                <input class="input" type="number" min="0" max="100" placeholder="Grade" id="grade">
-                                <button class="green-button" id="save-course">Save</button>
-                                <button class="grey-button" id="cancel-course">Cancel</button>
-                            </span>
-                        </div>
-                    </div>
+                    <UserInfo :currentUser="currentUser" v-if="toggleActive"></UserInfo>
+                    <CoursesInfo :coursesList="coursesList" v-else></CoursesInfo>
+                    >
                 </div>
                 <div class="controls">
-                    <button id="profile-button" class="pill active">Profile</button>
-                    <button id="courses-button" class="pill">Courses</button>
+                    <button id="profile-button" class="pill active" v-on:click="showProfile">Profile</button>
+                    <button id="courses-button" class="pill" v-on:click="showCourses">Courses</button>
                 </div>
             </section>
         </section>
@@ -81,16 +32,38 @@
 <script>
     import UserInfo from "./components/UserInfo";
     import {User} from "./components/User"
+    import CoursesInfo from "./components/CoursesInfo";
+    import {Course} from "./components/Course"
 
     export default {
         name: 'app',
+
         data: () => {
             return {
-                currentUser: new User("John", "Doe", "11/10/1990", "CompSci", "2.7")
+                currentUser: new User("John", "Doe", "11/10/1990", "CompSci", "2.7"),
+                coursesList: [
+                    new Course("Agile software development", 1, 82),
+                    new Course("System modelling", 1, 85),
+                    new Course("Object-oriented programming", 2, 99),
+                    new Course("Estonian Language Level A2", 2, 65)
+                ],
+                toggleActive: true,
             }
         },
+
         components: {
+            CoursesInfo,
             UserInfo
+        },
+
+        methods: {
+            showProfile: function () {
+                this.toggleActive = true;
+            },
+
+            showCourses: function () {
+                this.toggleActive = false;
+            }
         }
     }
 </script>
@@ -113,10 +86,6 @@
         position: relative;
         min-height: 100%;
         padding-bottom: 110px;
-    }
-
-    .clear-fix {
-        clear: both;
     }
 
     header {
@@ -165,49 +134,6 @@
         margin: 0 auto;
     }
 
-    #profile {
-        border-bottom: 1px dashed #a7a7a7;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-    }
-
-    #profile div:not(.clear-fix) {
-        height: 190px;
-        float: left;
-        position: relative;
-    }
-
-    #profile .avatar {
-        width: 35%;
-        text-align: center;
-    }
-
-    #profile .avatar img {
-        width: 180px;
-    }
-
-    #profile .info {
-        width: 45%;
-    }
-
-    #profile #gpa {
-        width: 20%;
-    }
-
-    #profile #gpa strong {
-        position: absolute;
-        width: 100%;
-        height: 60px;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto auto;
-        font-size: 60px;
-        line-height: 60px;
-        text-align: center;
-    }
-
     .content {
         padding: 10px;
         border: 1px solid #cbcbcb;
@@ -232,14 +158,6 @@
         border: 1px solid #cbcbcb;
     }
 
-    .content .tab {
-        display: none;
-    }
-
-    .content .tab.active {
-        display: block;
-    }
-
     .controls .pill {
         border: 1px solid #cbcbcb;
         background-color: #eaeaea;
@@ -260,34 +178,11 @@
         cursor: pointer;
     }
 
-    .blue-button {
-        background-color: #2196F3;
-        color: #ffffff;
-        border: none;
-        padding: 10px 20px;
-    }
-
-    .green-button {
-        background-color: #69f378;
-        color: #ffffff;
-        border: none;
-        padding: 10px 10px;
-    }
-
-    .grey-button {
-        background-color: #e1e8e6;
-        color: #ffffff;
-        border: none;
-        padding: 10px 20px;
-    }
-
-    .input {
-        border: 1px solid #cccccc;
-        padding: 10px 20px;
-        min-width: 135px;
-    }
-
-    #add-course {
+    .content .tab {
         display: none;
+    }
+
+    .content .tab.active {
+        display: block;
     }
 </style>

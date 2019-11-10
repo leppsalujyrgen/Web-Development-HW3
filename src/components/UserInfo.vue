@@ -73,4 +73,8 @@
         line-height: 60px;
         text-align: center;
     }
+
+    .clear-fix {
+        clear: both;
+    }
 </style>
