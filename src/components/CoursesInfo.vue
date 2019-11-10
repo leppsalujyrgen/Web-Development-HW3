@@ -42,22 +42,28 @@
         <div>
             <button id="add-course-button" class="blue-button" v-on:click="toggleNewCourseForm">+</button>
             <span id="add-course" v-bind:class="{ hide: !addCourseFormActive }">
-                                <input class="input" type="text" placeholder="Course title" id="title">
-                                <input class="input" type="number" min="1" max="8" placeholder="Semester" id="semester">
-                                <input class="input" type="number" min="0" max="100" placeholder="Grade" id="grade">
-                                <button class="green-button" id="save-course">Save</button>
-                                <button class="grey-button" id="cancel-course">Cancel</button>
+                                <input class="input" type="text" placeholder="Course title" id="title" v-model="newCourseForm.title">
+                                <input class="input" type="number" min="1" max="8" placeholder="Semester" id="semester" v-model="newCourseForm.semester">
+                                <input class="input" type="number" min="0" max="100" placeholder="Grade" id="grade" v-model="newCourseForm.grade">
+                                <button class="green-button" id="save-course" v-on:click="addNewCourse">Save</button>
+                                <button class="grey-button" id="cancel-course" v-on:click="clearNewCourseForm">Cancel</button>
                             </span>
         </div>
     </div>
 </template>
 
 <script>
+    import {Course} from "./Course"
     export default {
         name: "CoursesInfo",
 
         data: () => {
             return {
+                newCourseForm: {
+                    title: "",
+                    semester: "",
+                    grade: ""
+                },
                 addCourseFormActive: false,
             }
         },
@@ -66,6 +72,18 @@
             toggleNewCourseForm: function () {
                 this.addCourseFormActive = !this.addCourseFormActive;
             },
+
+            addNewCourse: function () {
+                this.coursesList.append(new Course(this.newCourseForm.title, this.newCourseForm.semester, this.newCourseForm.grade));
+                this.clearNewCourseForm();
+            },
+
+            clearNewCourseForm: function () {
+                this.newCourseForm.title = "";
+                this.newCourseForm.semester = "";
+                this.newCourseForm.grade = "";
+                this.toggleNewCourseForm();
+            }
         }
     }
 
