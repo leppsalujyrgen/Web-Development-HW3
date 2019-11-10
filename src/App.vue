@@ -8,7 +8,6 @@
                 <div class="content">
                     <UserInfo :currentUser="currentUser" v-if="toggleActive"></UserInfo>
                     <CoursesInfo :coursesList="coursesList" v-else></CoursesInfo>
-                    >
                 </div>
                 <div class="controls">
                     <button id="profile-button" :class="[toggleActive ? 'pill pill.active' : 'pill']" v-on:click="showProfile">Profile</button>
