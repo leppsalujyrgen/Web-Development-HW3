@@ -13,7 +13,7 @@
                 </ul>
             </div>
             <div id="gpa">
-                <strong>2.75</strong>
+                <strong>{{currentUser.gpa}}</strong>
             </div>
             <div class="clear-fix"></div>
         </div>

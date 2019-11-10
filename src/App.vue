@@ -11,8 +11,8 @@
                     >
                 </div>
                 <div class="controls">
-                    <button id="profile-button" class="pill active" v-on:click="showProfile">Profile</button>
-                    <button id="courses-button" class="pill" v-on:click="showCourses">Courses</button>
+                    <button id="profile-button" :class="[toggleActive ? 'pill pill.active' : 'pill']" v-on:click="showProfile">Profile</button>
+                    <button id="courses-button" :class="[toggleActive ? 'pill' : 'pill pill.active']" v-on:click="showCourses">Courses</button>
                 </div>
             </section>
         </section>
@@ -40,7 +40,7 @@
 
         data: () => {
             return {
-                currentUser: new User("John", "Doe", "11/10/1990", "CompSci", "2.7"),
+                currentUser: new User("John", "Doe", "11/10/1990", "Software engineering", "2.7"),
                 coursesList: [
                     new Course("Agile software development", 1, 82),
                     new Course("System modelling", 1, 85),
