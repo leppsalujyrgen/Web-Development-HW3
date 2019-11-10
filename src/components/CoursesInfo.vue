@@ -56,6 +56,7 @@
     import {Course} from "./Course"
     export default {
         name: "CoursesInfo",
+        props: ['coursesList'],
 
         data: () => {
             return {
@@ -74,7 +75,7 @@
             },
 
             addNewCourse: function () {
-                this.coursesList.append(new Course(this.newCourseForm.title, this.newCourseForm.semester, this.newCourseForm.grade));
+                this.coursesList.push(new Course(this.newCourseForm.title, this.newCourseForm.semester, this.newCourseForm.grade));
                 this.clearNewCourseForm();
             },
 
