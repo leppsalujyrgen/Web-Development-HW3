@@ -11,8 +11,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="course in coursesList" v-bind:key="course">
-                <td>{{coursesList.indexOf(course)+1}}</td>
+            <tr v-for="(course, idx) in coursesList" v-bind:key="idx">
+                <td>{{idx+1}}</td>
                 <td>{{course.title}}</td>
                 <td>{{course.semester}}</td>
                 <td>{{course.grade}}</td>
