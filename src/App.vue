@@ -6,24 +6,7 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <div id="profile-container" class="tab active">
-                        <div id="profile">
-                            <div class="avatar">
-                                <img src="./assets/me.png" id="picture" alt="My picture">
-                            </div>
-                            <div class="info">
-                                <ul>
-                                    <li id="name">John Doe</li>
-                                    <li id="birthdate">11/10/1990</li>
-                                    <li id="faculty">Software Engineering</li>
-                                </ul>
-                            </div>
-                            <div id="gpa">
-                                <strong>2.75</strong>
-                            </div>
-                            <div class="clear-fix"></div>
-                        </div>
-                    </div>
+                    <UserInfo :currentUser="currentUser"></UserInfo>
                     <div id="courses-container" class="tab">
                         <h1 class="title">Courses</h1>
                         <table id="courses">
@@ -96,10 +79,18 @@
 </template>
 
 <script>
-
+    import UserInfo from "./components/UserInfo";
+    import {User} from "./components/User"
     export default {
         name: 'app',
-        components: {}
+        data: () => {
+            return {
+                currentUser: new User("John", "Doe", "11/10/1990", "CompSci", "2.7")
+            }
+        },
+        components: {
+            UserInfo
+        }
     }
 </script>
 
