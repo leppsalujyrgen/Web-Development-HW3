@@ -1,32 +1,26 @@
 <template>
     <main id="app">
-        <HeaderInfo :titleText="titleText"></HeaderInfo>>
+        <HeaderInfo :titleText="titleText"></HeaderInfo>
         <section id="container">
-            <section id="main">
-                <div class="content">
-                    <UserInfo :currentUser="currentUser" v-if="toggleActive"></UserInfo>
-                    <CoursesInfo :coursesList="currentUser.coursesList" :currentUser="currentUser" v-else></CoursesInfo>
-                </div>
-                <div class="controls">
-                    <button id="profile-button" :class="[toggleActive ? 'pill' : 'pill pill-active']" v-on:focus="'pill-hover'" @click="showProfile">Profile</button>
-                    <button id="courses-button" :class="[toggleActive ? 'pill pill-active' : 'pill']" @click="showCourses">Courses</button>
-                </div>
-            </section>
+            <UserProfile :currentUser="currentUser"></UserProfile>
         </section>
         <FooterInfo/>
     </main>
 </template>
 
 <script>
-    import UserInfo from "./components/UserInfo";
-    import {User} from "./components/User"
-    import CoursesInfo from "./components/CoursesInfo";
-    import {Course} from "./components/Course"
     import FooterInfo from "./components/FooterInfo";
     import HeaderInfo from "./components/HeaderInfo";
+    import UserProfile from "./components/UserProfile";
+    import {Course} from "./components/Course"
+    import {User} from "./components/User"
 
     export default {
         name: 'app',
+
+        components: {
+            HeaderInfo, FooterInfo, UserProfile
+        },
 
         data: () => {
             return {
@@ -37,28 +31,10 @@
                     new Course("Estonian Language Level A2", 2, 65)
                 ],
                 currentUser: new User("John", "Doe", "11/10/1990", "Software engineering", "2.7"),
-                toggleActive: true,
+
                 titleText: "Welcome to your dashboard!"
             }
         },
-
-        components: {
-            HeaderInfo,
-            FooterInfo,
-            CoursesInfo,
-            UserInfo
-        },
-
-        methods: {
-            showProfile: function () {
-                this.toggleActive = true;
-            },
-
-            showCourses: function () {
-                this.toggleActive = false;
-            }
-        },
-
         created() {
             this.currentUser.coursesList = this.coursesList;
         }
@@ -78,64 +54,4 @@
         height: 100%;
         background-color: #eaeaea;
     }
-
-    main {
-        position: relative;
-        min-height: 100%;
-        padding-bottom: 110px;
-    }
-
-    #container {
-        width: 80%;
-        max-width: 900px;
-        min-width: 320px;
-        padding: 15px;
-        background-color: #ffffff;
-        margin: 0 auto;
-    }
-
-    .content {
-        padding: 10px;
-        border: 1px solid #cbcbcb;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-
-    }
-
-    table th {
-        padding: 8px 12px;
-        text-align: left;
-        border: 1px solid #cbcbcb;
-        background-color: #03A9F4;
-        color: #ffffff;
-    }
-
-    table td {
-        padding: 8px 12px;
-        border: 1px solid #cbcbcb;
-    }
-
-    .controls .pill {
-        border: 1px solid #cbcbcb;
-        background-color: #eaeaea;
-        padding: 10px;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-        border-top: none;
-        margin-top: -1px;
-        outline: none !important;
-    }
-
-    .controls .pill-active {
-        background-color: #CCD1D1;
-        border-top: 1px solid #ffffff;
-    }
-
-    .controls .pill-hover {
-        cursor: pointer;
-    }
-
 </style>

@@ -11,7 +11,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(course, idx) in coursesList" v-bind:key="idx">
+            <tr v-for="(course, idx) in currentUser.coursesList" v-bind:key="idx">
                 <td>{{idx+1}}</td>
                 <td>{{course.title}}</td>
                 <td>{{course.semester}}</td>
@@ -38,7 +38,7 @@
     import {Course} from "./Course"
     export default {
         name: "CoursesInfo",
-        props: ['coursesList', 'currentUser'],
+        props: ['currentUser'],
 
         data: () => {
             return {
