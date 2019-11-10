@@ -1,8 +1,6 @@
 <template>
     <main id="app">
-        <header>
-            <strong>Welcome to your dashboard!</strong>
-        </header>
+        <HeaderInfo :titleText="titleText"></HeaderInfo>>
         <section id="container">
             <section id="main">
                 <div class="content">
@@ -10,8 +8,8 @@
                     <CoursesInfo :coursesList="currentUser.coursesList" :currentUser="currentUser" v-else></CoursesInfo>
                 </div>
                 <div class="controls">
-                    <button id="profile-button" :class="[toggleActive ? 'pill' : 'pill pill.active']" @click="showProfile">Profile</button>
-                    <button id="courses-button" :class="[toggleActive ? 'pill pill.active' : 'pill']" @click="showCourses">Courses</button>
+                    <button id="profile-button" :class="[toggleActive ? 'pill' : 'pill pill-active']" v-on:focus="'pill-hover'" @click="showProfile">Profile</button>
+                    <button id="courses-button" :class="[toggleActive ? 'pill pill-active' : 'pill']" @click="showCourses">Courses</button>
                 </div>
             </section>
         </section>
@@ -25,6 +23,7 @@
     import CoursesInfo from "./components/CoursesInfo";
     import {Course} from "./components/Course"
     import FooterInfo from "./components/FooterInfo";
+    import HeaderInfo from "./components/HeaderInfo";
 
     export default {
         name: 'app',
@@ -39,10 +38,12 @@
                 ],
                 currentUser: new User("John", "Doe", "11/10/1990", "Software engineering", "2.7"),
                 toggleActive: true,
+                titleText: "Welcome to your dashboard!"
             }
         },
 
         components: {
+            HeaderInfo,
             FooterInfo,
             CoursesInfo,
             UserInfo
@@ -83,17 +84,6 @@
         min-height: 100%;
         padding-bottom: 110px;
     }
-
-    header {
-        padding: 20px;
-        background-color: #2196F3;
-        color: #ffffff;
-        text-align: center;
-        margin-bottom: 10px;
-        height: 60px;
-    }
-
-
 
     #container {
         width: 80%;
@@ -139,18 +129,12 @@
         outline: none !important;
     }
 
-    .controls .pill.active {
-        background-color: #ffffff;
+    .controls .pill-active {
+        background-color: #CCD1D1;
         border-top: 1px solid #ffffff;
-        padding: 10px;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-        border-top: none;
-        margin-top: -1px;
-        outline: none !important;
     }
 
-    .controls .pill:hover {
+    .controls .pill-hover {
         cursor: pointer;
     }
 
