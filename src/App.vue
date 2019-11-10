@@ -178,11 +178,4 @@
         cursor: pointer;
     }
 
-    .content .tab {
-        display: none;
-    }
-
-    .content .tab.active {
-        display: block;
-    }
 </style>
