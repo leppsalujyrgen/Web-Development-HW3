@@ -10,8 +10,8 @@
                     <CoursesInfo :coursesList="currentUser.coursesList" :currentUser="currentUser" v-else></CoursesInfo>
                 </div>
                 <div class="controls">
-                    <button id="profile-button" :class="[toggleActive ? 'pill pill.active' : 'pill']" v-on:click="showProfile">Profile</button>
-                    <button id="courses-button" :class="[toggleActive ? 'pill' : 'pill pill.active']" v-on:click="showCourses">Courses</button>
+                    <button id="profile-button" :class="[toggleActive ? 'pill' : 'pill pill.active']" @click="showProfile">Profile</button>
+                    <button id="courses-button" :class="[toggleActive ? 'pill pill.active' : 'pill']" @click="showCourses">Courses</button>
                 </div>
             </section>
         </section>
@@ -142,6 +142,12 @@
     .controls .pill.active {
         background-color: #ffffff;
         border-top: 1px solid #ffffff;
+        padding: 10px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-top: none;
+        margin-top: -1px;
+        outline: none !important;
     }
 
     .controls .pill:hover {
