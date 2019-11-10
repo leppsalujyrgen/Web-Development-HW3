@@ -40,8 +40,8 @@
         <br>
         <br>
         <div>
-            <button id="add-course-button" class="blue-button">+</button>
-            <span id="add-course">
+            <button id="add-course-button" class="blue-button" v-on:click="toggleNewCourseForm">+</button>
+            <span id="add-course" v-bind:class="{ hide: !addCourseFormActive }">
                                 <input class="input" type="text" placeholder="Course title" id="title">
                                 <input class="input" type="number" min="1" max="8" placeholder="Semester" id="semester">
                                 <input class="input" type="number" min="0" max="100" placeholder="Grade" id="grade">
@@ -54,8 +54,22 @@
 
 <script>
     export default {
-        name: "CoursesInfo"
+        name: "CoursesInfo",
+
+        data: () => {
+            return {
+                addCourseFormActive: false,
+            }
+        },
+
+        methods: {
+            toggleNewCourseForm: function () {
+                this.addCourseFormActive = !this.addCourseFormActive;
+            },
+        }
     }
+
+
 </script>
 
 <style scoped>
@@ -106,7 +120,7 @@
         min-width: 135px;
     }
 
-    #add-course {
+    .hide {
         display: none;
     }
 
