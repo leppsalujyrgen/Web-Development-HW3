@@ -22,7 +22,8 @@
 
 <script>
     import {User} from './User.js'
-    export default{
+
+    export default {
         props: {
             currentUser: {User: User}
         }

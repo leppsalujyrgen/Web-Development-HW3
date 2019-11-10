@@ -81,6 +81,7 @@
 <script>
     import UserInfo from "./components/UserInfo";
     import {User} from "./components/User"
+
     export default {
         name: 'app',
         data: () => {
